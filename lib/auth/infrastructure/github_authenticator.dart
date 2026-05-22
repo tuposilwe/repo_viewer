@@ -1,6 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:oauth2/oauth2.dart';
 import 'package:repo_viewer/auth/domain/auth_failure.dart';
 import 'package:repo_viewer/auth/infrastructure/credentials_storage/credentials_storage.dart';
+import 'package:repo_viewer/core/infrastructure/dio_extensions.dart';
 import 'package:repo_viewer/core/shared/encoders.dart';
 
 class GithubOauthHttpClient extends http.BaseClient {
@@ -113,8 +111,8 @@ class GithubAuthenticator {
           ),
         );
       } on DioException catch (e) {
-        if (e.type == DioExceptionType.unknown && e.error is SocketException) {
-          print('Token not revoked');
+        if (e.isNoConnectionError) {
+          // print('Token not revoked');
         } else {
           rethrow;
         }
