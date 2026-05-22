@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
@@ -102,13 +104,21 @@ class GithubAuthenticator {
     );
 
     try {
-      _dio.deleteUri(
-        revocationEndpoint,
-        data: {'access_token': accessToken},
-        options: Options(
-          headers: {'Authorization': 'basic $usernameAndPassword'},
-        ),
-      );
+      try {
+        _dio.deleteUri(
+          revocationEndpoint,
+          data: {'access_token': accessToken},
+          options: Options(
+            headers: {'Authorization': 'basic $usernameAndPassword'},
+          ),
+        );
+      } on DioException catch (e) {
+        if (e.type == DioExceptionType.unknown && e.error is SocketException) {
+          print('Token not revoked');
+        } else {
+          rethrow;
+        }
+      }
       await _credentialsStorage.clear();
       return right(unit);
     } on PlatformException {
