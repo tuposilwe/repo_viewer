@@ -11,11 +11,15 @@ class GithubAuthenticator {
 
   static const clientId = 'Ov23ct7mqD41IrZbosKN';
   static const clientSecret = '5575e107224a88a1db3420469d845a197d62c7ee';
-  static const scopes = ['read:user','repo'];
+  static const scopes = ['read:user', 'repo'];
 
-  static final authorizationEndpoint = Uri.parse('https://github.com/login/oauth/authorize');
+  static final authorizationEndpoint = Uri.parse(
+    'https://github.com/login/oauth/authorize',
+  );
 
-  static final tokenEndpoint = Uri.parse('https://github.com/login/oauth/access_token');
+  static final tokenEndpoint = Uri.parse(
+    'https://github.com/login/oauth/access_token',
+  );
 
   static final redirectUrl = Uri.parse('http://localhost:3000/callback');
 
@@ -37,4 +41,17 @@ class GithubAuthenticator {
 
   Future<bool> isSignedIn() =>
       getSignedInCredentials().then((credentials) => credentials != null);
+
+  AuthorizationCodeGrant createSecret() {
+    return AuthorizationCodeGrant(
+      clientId,
+      authorizationEndpoint,
+      tokenEndpoint,
+      secret: clientSecret,
+    );
+  }
+
+  Uri getAuthorizationUrl(AuthorizationCodeGrant grant){
+    return grant.getAuthorizationUrl(redirectUrl,scopes: scopes);
+  }
 }
