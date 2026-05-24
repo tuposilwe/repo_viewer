@@ -12,18 +12,66 @@ part of 'app_router.dart';
 
 /// generated route for
 /// [AuthorizationPage]
-class AuthorizationRoute extends PageRouteInfo<void> {
-  const AuthorizationRoute({List<PageRouteInfo>? children})
-    : super(AuthorizationRoute.name, initialChildren: children);
+class AuthorizationRoute extends PageRouteInfo<AuthorizationRouteArgs> {
+  AuthorizationRoute({
+    Key? key,
+    required Uri authorizationUrl,
+    required void Function(Uri) onAuthorizationCodeRedirectAttempt,
+    List<PageRouteInfo>? children,
+  }) : super(
+         AuthorizationRoute.name,
+         args: AuthorizationRouteArgs(
+           key: key,
+           authorizationUrl: authorizationUrl,
+           onAuthorizationCodeRedirectAttempt:
+               onAuthorizationCodeRedirectAttempt,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'AuthorizationRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const AuthorizationPage();
+      final args = data.argsAs<AuthorizationRouteArgs>();
+      return AuthorizationPage(
+        key: args.key,
+        authorizationUrl: args.authorizationUrl,
+        onAuthorizationCodeRedirectAttempt:
+            args.onAuthorizationCodeRedirectAttempt,
+      );
     },
   );
+}
+
+class AuthorizationRouteArgs {
+  const AuthorizationRouteArgs({
+    this.key,
+    required this.authorizationUrl,
+    required this.onAuthorizationCodeRedirectAttempt,
+  });
+
+  final Key? key;
+
+  final Uri authorizationUrl;
+
+  final void Function(Uri) onAuthorizationCodeRedirectAttempt;
+
+  @override
+  String toString() {
+    return 'AuthorizationRouteArgs{key: $key, authorizationUrl: $authorizationUrl, onAuthorizationCodeRedirectAttempt: $onAuthorizationCodeRedirectAttempt}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! AuthorizationRouteArgs) return false;
+    return key == other.key && authorizationUrl == other.authorizationUrl;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ authorizationUrl.hashCode;
 }
 
 /// generated route for

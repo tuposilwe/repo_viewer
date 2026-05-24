@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 
 @RoutePage()
 class AuthorizationPage extends StatefulWidget {
-  const AuthorizationPage({super.key});
+  final Uri authorizationUrl;
+  final void Function(Uri redirectUrl) onAuthorizationCodeRedirectAttempt;
+
+  const AuthorizationPage({
+    super.key, 
+    required this.authorizationUrl,
+     required this.onAuthorizationCodeRedirectAttempt});
 
   @override
   State<AuthorizationPage> createState() => _AuthorizationPageState();
