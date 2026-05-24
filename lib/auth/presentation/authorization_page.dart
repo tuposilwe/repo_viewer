@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:repo_viewer/auth/infrastructure/github_authenticator.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 @RoutePage()
@@ -29,9 +30,11 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
         NavigationDelegate(
           onNavigationRequest: (request) {
             final url = Uri.parse(request.url);
-            if (url.toString().startsWith('http://localhost:3000/callback')) {
+            if (url.toString().startsWith(
+              GithubAuthenticator.redirectUrl.toString(),
+            )) {
               widget.onAuthorizationCodeRedirectAttempt(url);
-              return NavigationDecision.prevent;
+              return NavigationDecision.prevent; 
             }
             return NavigationDecision.navigate;
           },
@@ -41,11 +44,16 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
   }
 
   @override
+  void dispose() {
+    _controller.clearCache();
+    WebViewCookieManager().clearCookies();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: WebViewWidget(controller: _controller),
-      ),
+      body: SafeArea(child: WebViewWidget(controller: _controller)),
     );
   }
 }
