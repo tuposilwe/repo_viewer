@@ -220,8 +220,8 @@ return $default(_that.owner,_that.name,_that.description,_that.stargazersCount);
 /// @nodoc
 @JsonSerializable()
 
-class _GithubRepoDto implements GithubRepoDto {
-  const _GithubRepoDto({required this.owner, required this.name, @JsonKey(fromJson: _descriptionFromJson) required this.description, @JsonKey(name: 'stargazers_count') required this.stargazersCount});
+class _GithubRepoDto extends GithubRepoDto {
+  const _GithubRepoDto({required this.owner, required this.name, @JsonKey(fromJson: _descriptionFromJson) required this.description, @JsonKey(name: 'stargazers_count') required this.stargazersCount}): super._();
   factory _GithubRepoDto.fromJson(Map<String, dynamic> json) => _$GithubRepoDtoFromJson(json);
 
 @override final  UserDTO owner;
