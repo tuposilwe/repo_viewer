@@ -206,8 +206,8 @@ return $default(_that.name,_that.avatarUrl);case _:
 /// @nodoc
 
 
-class _User implements User {
-  const _User({required this.name, required this.avatarUrl});
+class _User extends User {
+  const _User({required this.name, required this.avatarUrl}): super._();
   
 
 @override final  String name;

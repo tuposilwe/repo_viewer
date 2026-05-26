@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:repo_viewer/github/core/domain/user.dart';
 
 part 'user_dto.freezed.dart';
 
@@ -15,6 +16,13 @@ abstract class UserDTO with _$UserDTO {
 
   factory UserDTO.fromJson(Map<String, dynamic> json) =>
       _$UserDTOFromJson(json);
+
+  factory UserDTO.fromDomain(User user) {
+    return UserDTO(name: user.name, avatarUrl: user.avatarUrl);
+  }
+  User toDomain(){
+    return User(name: name, avatarUrl: avatarUrl);
+  }
   // factory UserDTO.fromJson(Map<String, dynamic> json) {
   //   return UserDTO(
   //     name: json['login'] as String,
