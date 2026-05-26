@@ -37,12 +37,14 @@ dependencies:
   flutter_hooks: ^0.21.3+1
   flutter_secure_storage: ^10.2.0
   freezed_annotation: ^3.1.0
-  hooks_riverpod: ^3.3.1
+  hooks_riverpod: ^2.6.1
   http: ^1.6.0
+  json_annotation: ^4.12.0
   material_design_icons_flutter: ^7.0.7296
   oauth2: ^2.0.5
   webview_flutter: ^4.13.1
 dev_dependencies:
+  json_serializable: ^6.14.0
   auto_route_generator: ^10.4.0
   build_runner: ^2.15.0
   flutter_lints: ^6.0.0
