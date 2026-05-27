@@ -14,30 +14,61 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RemoteResponse<T> {
 
-
+ int get maxPage;
+/// Create a copy of RemoteResponse
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$RemoteResponseCopyWith<T, RemoteResponse<T>> get copyWith => _$RemoteResponseCopyWithImpl<T, RemoteResponse<T>>(this as RemoteResponse<T>, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RemoteResponse<T>);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RemoteResponse<T>&&(identical(other.maxPage, maxPage) || other.maxPage == maxPage));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,maxPage);
 
 @override
 String toString() {
-  return 'RemoteResponse<$T>()';
+  return 'RemoteResponse<$T>(maxPage: $maxPage)';
 }
 
 
 }
 
 /// @nodoc
-class $RemoteResponseCopyWith<T,$Res>  {
-$RemoteResponseCopyWith(RemoteResponse<T> _, $Res Function(RemoteResponse<T>) __);
+abstract mixin class $RemoteResponseCopyWith<T,$Res>  {
+  factory $RemoteResponseCopyWith(RemoteResponse<T> value, $Res Function(RemoteResponse<T>) _then) = _$RemoteResponseCopyWithImpl;
+@useResult
+$Res call({
+ int maxPage
+});
+
+
+
+
+}
+/// @nodoc
+class _$RemoteResponseCopyWithImpl<T,$Res>
+    implements $RemoteResponseCopyWith<T, $Res> {
+  _$RemoteResponseCopyWithImpl(this._self, this._then);
+
+  final RemoteResponse<T> _self;
+  final $Res Function(RemoteResponse<T>) _then;
+
+/// Create a copy of RemoteResponse
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? maxPage = null,}) {
+  return _then(_self.copyWith(
+maxPage: null == maxPage ? _self.maxPage : maxPage // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
 }
 
 
@@ -55,12 +86,12 @@ extension RemoteResponsePatterns<T> on RemoteResponse<T> {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _NoConnection<T> value)?  noConnection,TResult Function( _NotModified<T> value)?  _notModified,TResult Function( _WithNewData<T> value)?  withNewData,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _NoConnection<T> value)?  noConnection,TResult Function( _NotModified<T> value)?  notModified,TResult Function( _WithNewData<T> value)?  withNewData,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _NoConnection() when noConnection != null:
-return noConnection(_that);case _NotModified() when _notModified != null:
-return _notModified(_that);case _WithNewData() when withNewData != null:
+return noConnection(_that);case _NotModified() when notModified != null:
+return notModified(_that);case _WithNewData() when withNewData != null:
 return withNewData(_that);case _:
   return orElse();
 
@@ -79,12 +110,12 @@ return withNewData(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _NoConnection<T> value)  noConnection,required TResult Function( _NotModified<T> value)  _notModified,required TResult Function( _WithNewData<T> value)  withNewData,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _NoConnection<T> value)  noConnection,required TResult Function( _NotModified<T> value)  notModified,required TResult Function( _WithNewData<T> value)  withNewData,}){
 final _that = this;
 switch (_that) {
 case _NoConnection():
 return noConnection(_that);case _NotModified():
-return _notModified(_that);case _WithNewData():
+return notModified(_that);case _WithNewData():
 return withNewData(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -102,12 +133,12 @@ return withNewData(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _NoConnection<T> value)?  noConnection,TResult? Function( _NotModified<T> value)?  _notModified,TResult? Function( _WithNewData<T> value)?  withNewData,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _NoConnection<T> value)?  noConnection,TResult? Function( _NotModified<T> value)?  notModified,TResult? Function( _WithNewData<T> value)?  withNewData,}){
 final _that = this;
 switch (_that) {
 case _NoConnection() when noConnection != null:
-return noConnection(_that);case _NotModified() when _notModified != null:
-return _notModified(_that);case _WithNewData() when withNewData != null:
+return noConnection(_that);case _NotModified() when notModified != null:
+return notModified(_that);case _WithNewData() when withNewData != null:
 return withNewData(_that);case _:
   return null;
 
@@ -125,12 +156,12 @@ return withNewData(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  noConnection,TResult Function()?  _notModified,TResult Function( T data)?  withNewData,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int maxPage)?  noConnection,TResult Function( int maxPage)?  notModified,TResult Function( T data,  int maxPage)?  withNewData,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _NoConnection() when noConnection != null:
-return noConnection();case _NotModified() when _notModified != null:
-return _notModified();case _WithNewData() when withNewData != null:
-return withNewData(_that.data);case _:
+return noConnection(_that.maxPage);case _NotModified() when notModified != null:
+return notModified(_that.maxPage);case _WithNewData() when withNewData != null:
+return withNewData(_that.data,_that.maxPage);case _:
   return orElse();
 
 }
@@ -148,12 +179,12 @@ return withNewData(_that.data);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  noConnection,required TResult Function()  _notModified,required TResult Function( T data)  withNewData,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int maxPage)  noConnection,required TResult Function( int maxPage)  notModified,required TResult Function( T data,  int maxPage)  withNewData,}) {final _that = this;
 switch (_that) {
 case _NoConnection():
-return noConnection();case _NotModified():
-return _notModified();case _WithNewData():
-return withNewData(_that.data);case _:
+return noConnection(_that.maxPage);case _NotModified():
+return notModified(_that.maxPage);case _WithNewData():
+return withNewData(_that.data,_that.maxPage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -170,12 +201,12 @@ return withNewData(_that.data);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  noConnection,TResult? Function()?  _notModified,TResult? Function( T data)?  withNewData,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int maxPage)?  noConnection,TResult? Function( int maxPage)?  notModified,TResult? Function( T data,  int maxPage)?  withNewData,}) {final _that = this;
 switch (_that) {
 case _NoConnection() when noConnection != null:
-return noConnection();case _NotModified() when _notModified != null:
-return _notModified();case _WithNewData() when withNewData != null:
-return withNewData(_that.data);case _:
+return noConnection(_that.maxPage);case _NotModified() when notModified != null:
+return notModified(_that.maxPage);case _WithNewData() when withNewData != null:
+return withNewData(_that.data,_that.maxPage);case _:
   return null;
 
 }
@@ -187,78 +218,147 @@ return withNewData(_that.data);case _:
 
 
 class _NoConnection<T> extends RemoteResponse<T> {
-  const _NoConnection(): super._();
+  const _NoConnection({required this.maxPage}): super._();
   
 
+@override final  int maxPage;
 
-
+/// Create a copy of RemoteResponse
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$NoConnectionCopyWith<T, _NoConnection<T>> get copyWith => __$NoConnectionCopyWithImpl<T, _NoConnection<T>>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NoConnection<T>);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NoConnection<T>&&(identical(other.maxPage, maxPage) || other.maxPage == maxPage));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,maxPage);
 
 @override
 String toString() {
-  return 'RemoteResponse<$T>.noConnection()';
+  return 'RemoteResponse<$T>.noConnection(maxPage: $maxPage)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$NoConnectionCopyWith<T,$Res> implements $RemoteResponseCopyWith<T, $Res> {
+  factory _$NoConnectionCopyWith(_NoConnection<T> value, $Res Function(_NoConnection<T>) _then) = __$NoConnectionCopyWithImpl;
+@override @useResult
+$Res call({
+ int maxPage
+});
 
 
+
+
+}
+/// @nodoc
+class __$NoConnectionCopyWithImpl<T,$Res>
+    implements _$NoConnectionCopyWith<T, $Res> {
+  __$NoConnectionCopyWithImpl(this._self, this._then);
+
+  final _NoConnection<T> _self;
+  final $Res Function(_NoConnection<T>) _then;
+
+/// Create a copy of RemoteResponse
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? maxPage = null,}) {
+  return _then(_NoConnection<T>(
+maxPage: null == maxPage ? _self.maxPage : maxPage // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
 
 /// @nodoc
 
 
 class _NotModified<T> extends RemoteResponse<T> {
-  const _NotModified(): super._();
+  const _NotModified({required this.maxPage}): super._();
   
 
+@override final  int maxPage;
 
-
+/// Create a copy of RemoteResponse
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$NotModifiedCopyWith<T, _NotModified<T>> get copyWith => __$NotModifiedCopyWithImpl<T, _NotModified<T>>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NotModified<T>);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NotModified<T>&&(identical(other.maxPage, maxPage) || other.maxPage == maxPage));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,maxPage);
 
 @override
 String toString() {
-  return 'RemoteResponse<$T>._notModified()';
+  return 'RemoteResponse<$T>.notModified(maxPage: $maxPage)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$NotModifiedCopyWith<T,$Res> implements $RemoteResponseCopyWith<T, $Res> {
+  factory _$NotModifiedCopyWith(_NotModified<T> value, $Res Function(_NotModified<T>) _then) = __$NotModifiedCopyWithImpl;
+@override @useResult
+$Res call({
+ int maxPage
+});
 
 
+
+
+}
+/// @nodoc
+class __$NotModifiedCopyWithImpl<T,$Res>
+    implements _$NotModifiedCopyWith<T, $Res> {
+  __$NotModifiedCopyWithImpl(this._self, this._then);
+
+  final _NotModified<T> _self;
+  final $Res Function(_NotModified<T>) _then;
+
+/// Create a copy of RemoteResponse
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? maxPage = null,}) {
+  return _then(_NotModified<T>(
+maxPage: null == maxPage ? _self.maxPage : maxPage // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
 
 /// @nodoc
 
 
 class _WithNewData<T> extends RemoteResponse<T> {
-  const _WithNewData(this.data): super._();
+  const _WithNewData(this.data, {required this.maxPage}): super._();
   
 
  final  T data;
+@override final  int maxPage;
 
 /// Create a copy of RemoteResponse
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 _$WithNewDataCopyWith<T, _WithNewData<T>> get copyWith => __$WithNewDataCopyWithImpl<T, _WithNewData<T>>(this, _$identity);
 
@@ -266,16 +366,16 @@ _$WithNewDataCopyWith<T, _WithNewData<T>> get copyWith => __$WithNewDataCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WithNewData<T>&&const DeepCollectionEquality().equals(other.data, data));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WithNewData<T>&&const DeepCollectionEquality().equals(other.data, data)&&(identical(other.maxPage, maxPage) || other.maxPage == maxPage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(data));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(data),maxPage);
 
 @override
 String toString() {
-  return 'RemoteResponse<$T>.withNewData(data: $data)';
+  return 'RemoteResponse<$T>.withNewData(data: $data, maxPage: $maxPage)';
 }
 
 
@@ -284,9 +384,9 @@ String toString() {
 /// @nodoc
 abstract mixin class _$WithNewDataCopyWith<T,$Res> implements $RemoteResponseCopyWith<T, $Res> {
   factory _$WithNewDataCopyWith(_WithNewData<T> value, $Res Function(_WithNewData<T>) _then) = __$WithNewDataCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- T data
+ T data, int maxPage
 });
 
 
@@ -303,10 +403,11 @@ class __$WithNewDataCopyWithImpl<T,$Res>
 
 /// Create a copy of RemoteResponse
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? data = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? data = freezed,Object? maxPage = null,}) {
   return _then(_WithNewData<T>(
 freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as T,
+as T,maxPage: null == maxPage ? _self.maxPage : maxPage // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
