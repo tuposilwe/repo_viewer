@@ -17,7 +17,7 @@ class StarredReposRemoteService {
     int page,
   ) async {
     const baseUrl = "api.github.com";
-    const token = "";
+    const token = String.fromEnvironment('TOKEN');
     const acceptHeader = "application/vnd.github+json";
     // const readmeAcceptHeader = "application/vnd.github.v3.html+json";
 
