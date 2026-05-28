@@ -5,13 +5,14 @@ import 'package:repo_viewer/core/infrastructure/remote_response.dart';
 import 'package:repo_viewer/github/core/domain/github_failure.dart';
 import 'package:repo_viewer/github/core/domain/github_repo.dart';
 import 'package:repo_viewer/github/core/infrastructure/github_repo_dto.dart';
+import 'package:repo_viewer/github/repos/starred_repos/infrastructure/starred_repos_local_services.dart';
 import 'package:repo_viewer/github/repos/starred_repos/infrastructure/starred_repos_remote_service.dart';
 
 class StarredReposRepository {
   final StarredReposRemoteService _remoteService;
+  final StarredReposLocalServices _localServices;
 
-  // TODO: local service
-  StarredReposRepository(this._remoteService);
+  StarredReposRepository(this._remoteService, this._localServices);
 
   Future<Either<GithubFailure, Fresh<List<GithubRepo>>>> getStarredReposPage(
     int page,
@@ -19,15 +20,18 @@ class StarredReposRepository {
     try {
       final remotePageItems = await _remoteService.getStarredReposPage(page);
       return right(
-        remotePageItems.when(
-          // TODO: local service
-          noConnection: (maxPage) =>
-              Fresh.no([], isNextPageAvailable: page < maxPage),
-          // TODO: local service
-          notModified: (maxPage) =>
-              Fresh.yes([], isNextPageAvailable: page < maxPage),
-          withNewData: (data, maxPage) {
-          // TODO: save data in local service
+        await remotePageItems.when(
+          noConnection: (maxPage) async => Fresh.no(
+            await _localServices.getPage(page).then((e) => e.toDomain()),
+            isNextPageAvailable: page < maxPage,
+          ),
+
+          notModified: (maxPage) async => Fresh.yes(
+            await _localServices.getPage(page).then((e) => e.toDomain()),
+            isNextPageAvailable: page < maxPage,
+          ),
+          withNewData: (data, maxPage) async {
+            await _localServices.upsertPage(data, page);
             return Fresh.yes(
               data.toDomain(),
               isNextPageAvailable: page < maxPage,
