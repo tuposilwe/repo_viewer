@@ -95,13 +95,13 @@ extension StarredReposStatePatterns on StarredReposState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _LoadInProgress value)?  loadInProgress,TResult Function( _LoadInSuccess value)?  loadInSuccess,TResult Function( _LoadFailure value)?  loadFailure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _LoadInProgress value)?  loadInProgress,TResult Function( _LoadInSuccess value)?  loadSuccess,TResult Function( _LoadFailure value)?  loadFailure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _LoadInProgress() when loadInProgress != null:
-return loadInProgress(_that);case _LoadInSuccess() when loadInSuccess != null:
-return loadInSuccess(_that);case _LoadFailure() when loadFailure != null:
+return loadInProgress(_that);case _LoadInSuccess() when loadSuccess != null:
+return loadSuccess(_that);case _LoadFailure() when loadFailure != null:
 return loadFailure(_that);case _:
   return orElse();
 
@@ -120,13 +120,13 @@ return loadFailure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _LoadInProgress value)  loadInProgress,required TResult Function( _LoadInSuccess value)  loadInSuccess,required TResult Function( _LoadFailure value)  loadFailure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _LoadInProgress value)  loadInProgress,required TResult Function( _LoadInSuccess value)  loadSuccess,required TResult Function( _LoadFailure value)  loadFailure,}){
 final _that = this;
 switch (_that) {
 case _Initial():
 return initial(_that);case _LoadInProgress():
 return loadInProgress(_that);case _LoadInSuccess():
-return loadInSuccess(_that);case _LoadFailure():
+return loadSuccess(_that);case _LoadFailure():
 return loadFailure(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -144,13 +144,13 @@ return loadFailure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _LoadInProgress value)?  loadInProgress,TResult? Function( _LoadInSuccess value)?  loadInSuccess,TResult? Function( _LoadFailure value)?  loadFailure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _LoadInProgress value)?  loadInProgress,TResult? Function( _LoadInSuccess value)?  loadSuccess,TResult? Function( _LoadFailure value)?  loadFailure,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _LoadInProgress() when loadInProgress != null:
-return loadInProgress(_that);case _LoadInSuccess() when loadInSuccess != null:
-return loadInSuccess(_that);case _LoadFailure() when loadFailure != null:
+return loadInProgress(_that);case _LoadInSuccess() when loadSuccess != null:
+return loadSuccess(_that);case _LoadFailure() when loadFailure != null:
 return loadFailure(_that);case _:
   return null;
 
@@ -168,12 +168,12 @@ return loadFailure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Fresh<List<GithubRepo>> repos)?  initial,TResult Function( Fresh<List<GithubRepo>> repos,  int itemsPerPage)?  loadInProgress,TResult Function( Fresh<List<GithubRepo>> repos,  bool isNextPageAvailable)?  loadInSuccess,TResult Function( Fresh<List<GithubRepo>> repos,  GithubFailure failure)?  loadFailure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Fresh<List<GithubRepo>> repos)?  initial,TResult Function( Fresh<List<GithubRepo>> repos,  int itemsPerPage)?  loadInProgress,TResult Function( Fresh<List<GithubRepo>> repos,  bool isNextPageAvailable)?  loadSuccess,TResult Function( Fresh<List<GithubRepo>> repos,  GithubFailure failure)?  loadFailure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that.repos);case _LoadInProgress() when loadInProgress != null:
-return loadInProgress(_that.repos,_that.itemsPerPage);case _LoadInSuccess() when loadInSuccess != null:
-return loadInSuccess(_that.repos,_that.isNextPageAvailable);case _LoadFailure() when loadFailure != null:
+return loadInProgress(_that.repos,_that.itemsPerPage);case _LoadInSuccess() when loadSuccess != null:
+return loadSuccess(_that.repos,_that.isNextPageAvailable);case _LoadFailure() when loadFailure != null:
 return loadFailure(_that.repos,_that.failure);case _:
   return orElse();
 
@@ -192,12 +192,12 @@ return loadFailure(_that.repos,_that.failure);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Fresh<List<GithubRepo>> repos)  initial,required TResult Function( Fresh<List<GithubRepo>> repos,  int itemsPerPage)  loadInProgress,required TResult Function( Fresh<List<GithubRepo>> repos,  bool isNextPageAvailable)  loadInSuccess,required TResult Function( Fresh<List<GithubRepo>> repos,  GithubFailure failure)  loadFailure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Fresh<List<GithubRepo>> repos)  initial,required TResult Function( Fresh<List<GithubRepo>> repos,  int itemsPerPage)  loadInProgress,required TResult Function( Fresh<List<GithubRepo>> repos,  bool isNextPageAvailable)  loadSuccess,required TResult Function( Fresh<List<GithubRepo>> repos,  GithubFailure failure)  loadFailure,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial(_that.repos);case _LoadInProgress():
 return loadInProgress(_that.repos,_that.itemsPerPage);case _LoadInSuccess():
-return loadInSuccess(_that.repos,_that.isNextPageAvailable);case _LoadFailure():
+return loadSuccess(_that.repos,_that.isNextPageAvailable);case _LoadFailure():
 return loadFailure(_that.repos,_that.failure);case _:
   throw StateError('Unexpected subclass');
 
@@ -215,12 +215,12 @@ return loadFailure(_that.repos,_that.failure);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Fresh<List<GithubRepo>> repos)?  initial,TResult? Function( Fresh<List<GithubRepo>> repos,  int itemsPerPage)?  loadInProgress,TResult? Function( Fresh<List<GithubRepo>> repos,  bool isNextPageAvailable)?  loadInSuccess,TResult? Function( Fresh<List<GithubRepo>> repos,  GithubFailure failure)?  loadFailure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Fresh<List<GithubRepo>> repos)?  initial,TResult? Function( Fresh<List<GithubRepo>> repos,  int itemsPerPage)?  loadInProgress,TResult? Function( Fresh<List<GithubRepo>> repos,  bool isNextPageAvailable)?  loadSuccess,TResult? Function( Fresh<List<GithubRepo>> repos,  GithubFailure failure)?  loadFailure,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that.repos);case _LoadInProgress() when loadInProgress != null:
-return loadInProgress(_that.repos,_that.itemsPerPage);case _LoadInSuccess() when loadInSuccess != null:
-return loadInSuccess(_that.repos,_that.isNextPageAvailable);case _LoadFailure() when loadFailure != null:
+return loadInProgress(_that.repos,_that.itemsPerPage);case _LoadInSuccess() when loadSuccess != null:
+return loadSuccess(_that.repos,_that.isNextPageAvailable);case _LoadFailure() when loadFailure != null:
 return loadFailure(_that.repos,_that.failure);case _:
   return null;
 
@@ -410,7 +410,7 @@ int get hashCode => Object.hash(runtimeType,repos,isNextPageAvailable);
 
 @override
 String toString() {
-  return 'StarredReposState.loadInSuccess(repos: $repos, isNextPageAvailable: $isNextPageAvailable)';
+  return 'StarredReposState.loadSuccess(repos: $repos, isNextPageAvailable: $isNextPageAvailable)';
 }
 
 
