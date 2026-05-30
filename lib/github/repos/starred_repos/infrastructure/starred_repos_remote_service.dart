@@ -37,7 +37,7 @@ class StarredReposRemoteService {
           headers: {
             // 'Authorization': 'bearer $token',
             // 'Accept': acceptHeader,
-            'If-None-Match:': previousHeaders?.etag ?? '',
+            'If-None-Match': previousHeaders?.etag ?? '',
           },
         ),
       );
