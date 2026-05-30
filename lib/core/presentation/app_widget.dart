@@ -12,12 +12,13 @@ final _appRouter = AppRouter();
 final initializationProvider = FutureProvider<Unit>((ref) async {
   await ref.read(sembastProvider).init();
   ref.read(dioProvider)
-  ..options = BaseOptions(
-    headers: {
-      'Accept': 'application/vnd.github+json'
-    }
-  )..interceptors.add(ref.read(oAuth2InterceptorProvider));
-  
+    ..options = BaseOptions(
+      headers: {'Accept': 'application/vnd.github+json'},
+      validateStatus: (status) =>
+          status != null && status >= 200 && status < 400,
+    )
+    ..interceptors.add(ref.read(oAuth2InterceptorProvider));
+
   final authNotifier = ref.read(authNotifierProvider.notifier);
   await authNotifier.checkAndUpdateAuthStatus();
   return unit;
