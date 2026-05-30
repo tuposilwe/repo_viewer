@@ -15,7 +15,7 @@ _GithubHeaders _$GithubHeadersFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$GithubHeadersToJson(_GithubHeaders instance) =>
-    <String, dynamic>{'etag': instance.etag, 'link': instance.link};
+    <String, dynamic>{'etag': instance.etag, 'link': instance.link?.toJson()};
 
 _PaginationLink _$PaginationLinkFromJson(Map<String, dynamic> json) =>
     _PaginationLink(maxPage: (json['maxPage'] as num).toInt());

@@ -16,7 +16,7 @@ _GithubRepoDto _$GithubRepoDtoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$GithubRepoDtoToJson(_GithubRepoDto instance) =>
     <String, dynamic>{
-      'owner': instance.owner,
+      'owner': instance.owner.toJson(),
       'name': instance.name,
       'description': instance.description,
       'stargazers_count': instance.stargazersCount,
