@@ -6,34 +6,46 @@ import 'package:repo_viewer/github/repos/starred_repos/presentation/failure_repo
 import 'package:repo_viewer/github/repos/starred_repos/presentation/loading_repo_tile.dart';
 import 'package:repo_viewer/github/repos/starred_repos/presentation/repo_tile.dart';
 
-class PaginatedReposListView extends StatefulWidget {
+class PaginatedReposListView extends ConsumerStatefulWidget {
   const PaginatedReposListView({super.key});
 
   @override
-  State<PaginatedReposListView> createState() => _PaginatedReposListViewState();
+  ConsumerState<PaginatedReposListView> createState() =>
+      _PaginatedReposListViewState();
 }
 
-class _PaginatedReposListViewState extends State<PaginatedReposListView> {
+class _PaginatedReposListViewState
+    extends ConsumerState<PaginatedReposListView> {
   bool canLoadNextPage = false;
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, child) {
-        final state = ref.watch(starredReposNotifierProvider);
-        ref.listen<StarredReposState>(starredReposNotifierProvider, (
-          previous,
-          state,
-        ) {
-          state.map(
-            initial: (e) => canLoadNextPage = true,
-            loadInProgress:  (e) => canLoadNextPage = false,
-            loadSuccess:  (e) => canLoadNextPage = e.isNextPageAvailable,
-            loadFailure:  (e) => canLoadNextPage = false,
-          );
-        });
-        return _PaginatedListView(state: state);
+    final state = ref.watch(starredReposNotifierProvider);
+    ref.listen<StarredReposState>(starredReposNotifierProvider, (
+      previous,
+      next,
+    ) {
+      next.map(
+        initial: (e) => canLoadNextPage = true,
+        loadInProgress: (e) => canLoadNextPage = false,
+        loadSuccess: (e) => canLoadNextPage = e.isNextPageAvailable,
+        loadFailure: (e) => canLoadNextPage = false,
+      );
+    });
+    return NotificationListener<ScrollNotification>(
+      onNotification: (notification) {
+        final metrics = notification.metrics;
+        final limit = metrics.maxScrollExtent - metrics.viewportDimension / 3;
+
+        if (canLoadNextPage && metrics.pixels >= limit) {
+          canLoadNextPage = false;
+          ref
+              .read(starredReposNotifierProvider.notifier)
+              .getNextStarredReposPage();
+        }
+        return false;
       },
+      child: _PaginatedListView(state: state),
     );
   }
 }

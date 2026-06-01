@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -43,19 +44,19 @@ abstract class PaginationLink with _$PaginationLink {
     List<String> values, {
     required String requestUrl,
   }) {
-    final maxPage = _extractPageNumber(
-      values.firstWhere(
-        (e) => e.contains('rel="last"'),
-        orElse: () => requestUrl,
-      ),
-    );
+    final lastEntry = values.firstWhereOrNull((e) => e.contains('rel="last"'));
+    final maxPage =
+        lastEntry != null ? _extractPageNumber(lastEntry) : null;
 
-    return PaginationLink(maxPage: maxPage!);
+    return PaginationLink(maxPage: maxPage ?? 0);
   }
 
   static int? _extractPageNumber(String value) {
     final uriString = RegExp('<([^>]+)>').firstMatch(value)?.group(1);
-    return int.tryParse(Uri.parse(uriString!).queryParameters['page']!);
+    if (uriString == null) return null;
+    return int.tryParse(
+      Uri.parse(uriString).queryParameters['page'] ?? '',
+    );
   }
 
   factory PaginationLink.fromJson(Map<String, dynamic> json) =>
