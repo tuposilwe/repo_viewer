@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:repo_viewer/github/core/shared/providers.dart';
 import 'package:repo_viewer/github/repos/starred_repos/application/starred_repos_notifier.dart';
+import 'package:repo_viewer/github/repos/starred_repos/presentation/failure_repo_tile.dart';
 import 'package:repo_viewer/github/repos/starred_repos/presentation/loading_repo_tile.dart';
 import 'package:repo_viewer/github/repos/starred_repos/presentation/repo_tile.dart';
 
@@ -22,7 +23,7 @@ class PaginatedReposListView extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             return state.map(
-              initial: (_) => Container(),
+              initial: (e) => RepoTile(repo: e.repos.entity[index]),
               loadInProgress: (e) {
                 if (index < e.repos.entity.length) {
                   return RepoTile(repo: e.repos.entity[index]);
@@ -31,11 +32,17 @@ class PaginatedReposListView extends StatelessWidget {
                 }
               },
               loadSuccess: (e) => RepoTile(repo: e.repos.entity[index]),
-              loadFailure: (e) => Container(),
+              loadFailure: (e) {
+                if (index < e.repos.entity.length) {
+                  return RepoTile(repo: e.repos.entity[index]);
+                } else {
+                  return FailureRepoTile(failure: e.failure);
+                }
+              },
             );
           },
         );
       },
     );
   }
-} 
+}

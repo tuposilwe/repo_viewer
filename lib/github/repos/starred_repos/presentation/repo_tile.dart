@@ -27,7 +27,7 @@ class RepoTile extends StatelessWidget {
           const Icon(Icons.star_border),
           Text(
             repo.stargazersCount.toString(),
-            // style: Theme.of(context).textTheme.caption
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ],
       ),
