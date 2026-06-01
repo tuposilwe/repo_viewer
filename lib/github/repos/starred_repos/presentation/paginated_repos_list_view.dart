@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:repo_viewer/core/presentation/toasts.dart';
+import 'package:repo_viewer/github/core/domain/github_failure.dart';
 import 'package:repo_viewer/github/core/shared/providers.dart';
 import 'package:repo_viewer/github/repos/starred_repos/application/starred_repos_notifier.dart';
 import 'package:repo_viewer/github/repos/starred_repos/presentation/failure_repo_tile.dart';
@@ -28,8 +30,19 @@ class _PaginatedReposListViewState
       next.map(
         initial: (e) => canLoadNextPage = true,
         loadInProgress: (e) => canLoadNextPage = false,
-        loadSuccess: (e) => canLoadNextPage = e.isNextPageAvailable,
-        loadFailure: (e) => canLoadNextPage = false,
+        loadSuccess: (e) {
+          if (!e.repos.isFresh) {
+            showNoConnectionToast("You're offline. Showing cached data.", context);
+          }
+          return canLoadNextPage = e.isNextPageAvailable;
+        },
+        loadFailure: (e) {
+          showErrorToast(
+            e.failure.map(api: (f) => 'API error (${f.errorCode})'),
+            context,
+          );
+          return canLoadNextPage = false;
+        },
       );
     });
     return NotificationListener<ScrollNotification>(
