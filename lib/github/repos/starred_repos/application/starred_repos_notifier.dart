@@ -48,7 +48,9 @@ class StarredReposNotifier extends StateNotifier<StarredReposState> {
       (r) {
         _page++;
         return StarredReposState.loadSuccess(
-          r.copyWith(entity: [...state.repos.entity, ...r.entity]),
+          r.copyWith(entity: [
+            ...state.repos.entity, ...r.entity
+            ]),
           isNextPageAvailable: r.isNextPageAvailable ?? false,
         );
       },
