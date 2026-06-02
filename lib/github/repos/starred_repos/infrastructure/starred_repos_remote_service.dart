@@ -17,7 +17,7 @@ class StarredReposRemoteService {
 
   Future<RemoteResponse<List<GithubRepoDto>>> getStarredReposPage(
     int page,
-  ) async { 
+  ) async {
     const baseUrl = "api.github.com";
     // const token = String.fromEnvironment('TOKEN');
     // const acceptHeader = "application/vnd.github+json";
@@ -61,9 +61,7 @@ class StarredReposRemoteService {
       }
     } on DioException catch (e) {
       if (e.isNoConnectionError) {
-        return RemoteResponse.noConnection(
-          maxPage: previousHeaders?.link?.maxPage ?? 1,
-        );
+        return const RemoteResponse.noConnection();
       } else if (e.response != null) {
         throw RestAPiException(e.response?.statusCode);
       } else {
