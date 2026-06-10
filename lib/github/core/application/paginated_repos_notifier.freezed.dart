@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'starred_repos_notifier.dart';
+part of 'paginated_repos_notifier.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -12,20 +12,20 @@ part of 'starred_repos_notifier.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$StarredReposState {
+mixin _$PaginatedReposState {
 
  Fresh<List<GithubRepo>> get repos;
-/// Create a copy of StarredReposState
+/// Create a copy of PaginatedReposState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$StarredReposStateCopyWith<StarredReposState> get copyWith => _$StarredReposStateCopyWithImpl<StarredReposState>(this as StarredReposState, _$identity);
+$PaginatedReposStateCopyWith<PaginatedReposState> get copyWith => _$PaginatedReposStateCopyWithImpl<PaginatedReposState>(this as PaginatedReposState, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StarredReposState&&(identical(other.repos, repos) || other.repos == repos));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaginatedReposState&&(identical(other.repos, repos) || other.repos == repos));
 }
 
 
@@ -34,15 +34,15 @@ int get hashCode => Object.hash(runtimeType,repos);
 
 @override
 String toString() {
-  return 'StarredReposState(repos: $repos)';
+  return 'PaginatedReposState(repos: $repos)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $StarredReposStateCopyWith<$Res>  {
-  factory $StarredReposStateCopyWith(StarredReposState value, $Res Function(StarredReposState) _then) = _$StarredReposStateCopyWithImpl;
+abstract mixin class $PaginatedReposStateCopyWith<$Res>  {
+  factory $PaginatedReposStateCopyWith(PaginatedReposState value, $Res Function(PaginatedReposState) _then) = _$PaginatedReposStateCopyWithImpl;
 @useResult
 $Res call({
  Fresh<List<GithubRepo>> repos
@@ -53,14 +53,14 @@ $FreshCopyWith<List<GithubRepo>, $Res> get repos;
 
 }
 /// @nodoc
-class _$StarredReposStateCopyWithImpl<$Res>
-    implements $StarredReposStateCopyWith<$Res> {
-  _$StarredReposStateCopyWithImpl(this._self, this._then);
+class _$PaginatedReposStateCopyWithImpl<$Res>
+    implements $PaginatedReposStateCopyWith<$Res> {
+  _$PaginatedReposStateCopyWithImpl(this._self, this._then);
 
-  final StarredReposState _self;
-  final $Res Function(StarredReposState) _then;
+  final PaginatedReposState _self;
+  final $Res Function(PaginatedReposState) _then;
 
-/// Create a copy of StarredReposState
+/// Create a copy of PaginatedReposState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? repos = null,}) {
   return _then(_self.copyWith(
@@ -68,7 +68,7 @@ repos: null == repos ? _self.repos : repos // ignore: cast_nullable_to_non_nulla
 as Fresh<List<GithubRepo>>,
   ));
 }
-/// Create a copy of StarredReposState
+/// Create a copy of PaginatedReposState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -81,8 +81,8 @@ $FreshCopyWith<List<GithubRepo>, $Res> get repos {
 }
 
 
-/// Adds pattern-matching-related methods to [StarredReposState].
-extension StarredReposStatePatterns on StarredReposState {
+/// Adds pattern-matching-related methods to [PaginatedReposState].
+extension PaginatedReposStatePatterns on PaginatedReposState {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -232,13 +232,13 @@ return loadFailure(_that.repos,_that.failure);case _:
 /// @nodoc
 
 
-class _Initial extends StarredReposState {
+class _Initial extends PaginatedReposState {
   const _Initial(this.repos): super._();
   
 
 @override final  Fresh<List<GithubRepo>> repos;
 
-/// Create a copy of StarredReposState
+/// Create a copy of PaginatedReposState
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -257,14 +257,14 @@ int get hashCode => Object.hash(runtimeType,repos);
 
 @override
 String toString() {
-  return 'StarredReposState.initial(repos: $repos)';
+  return 'PaginatedReposState.initial(repos: $repos)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$InitialCopyWith<$Res> implements $StarredReposStateCopyWith<$Res> {
+abstract mixin class _$InitialCopyWith<$Res> implements $PaginatedReposStateCopyWith<$Res> {
   factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) _then) = __$InitialCopyWithImpl;
 @override @useResult
 $Res call({
@@ -283,7 +283,7 @@ class __$InitialCopyWithImpl<$Res>
   final _Initial _self;
   final $Res Function(_Initial) _then;
 
-/// Create a copy of StarredReposState
+/// Create a copy of PaginatedReposState
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? repos = null,}) {
   return _then(_Initial(
@@ -292,7 +292,7 @@ as Fresh<List<GithubRepo>>,
   ));
 }
 
-/// Create a copy of StarredReposState
+/// Create a copy of PaginatedReposState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -307,14 +307,14 @@ $FreshCopyWith<List<GithubRepo>, $Res> get repos {
 /// @nodoc
 
 
-class _LoadInProgress extends StarredReposState {
+class _LoadInProgress extends PaginatedReposState {
   const _LoadInProgress(this.repos, this.itemsPerPage): super._();
   
 
 @override final  Fresh<List<GithubRepo>> repos;
  final  int itemsPerPage;
 
-/// Create a copy of StarredReposState
+/// Create a copy of PaginatedReposState
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -333,14 +333,14 @@ int get hashCode => Object.hash(runtimeType,repos,itemsPerPage);
 
 @override
 String toString() {
-  return 'StarredReposState.loadInProgress(repos: $repos, itemsPerPage: $itemsPerPage)';
+  return 'PaginatedReposState.loadInProgress(repos: $repos, itemsPerPage: $itemsPerPage)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$LoadInProgressCopyWith<$Res> implements $StarredReposStateCopyWith<$Res> {
+abstract mixin class _$LoadInProgressCopyWith<$Res> implements $PaginatedReposStateCopyWith<$Res> {
   factory _$LoadInProgressCopyWith(_LoadInProgress value, $Res Function(_LoadInProgress) _then) = __$LoadInProgressCopyWithImpl;
 @override @useResult
 $Res call({
@@ -359,7 +359,7 @@ class __$LoadInProgressCopyWithImpl<$Res>
   final _LoadInProgress _self;
   final $Res Function(_LoadInProgress) _then;
 
-/// Create a copy of StarredReposState
+/// Create a copy of PaginatedReposState
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? repos = null,Object? itemsPerPage = null,}) {
   return _then(_LoadInProgress(
@@ -369,7 +369,7 @@ as int,
   ));
 }
 
-/// Create a copy of StarredReposState
+/// Create a copy of PaginatedReposState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -384,14 +384,14 @@ $FreshCopyWith<List<GithubRepo>, $Res> get repos {
 /// @nodoc
 
 
-class _LoadInSuccess extends StarredReposState {
+class _LoadInSuccess extends PaginatedReposState {
   const _LoadInSuccess(this.repos, {required this.isNextPageAvailable}): super._();
   
 
 @override final  Fresh<List<GithubRepo>> repos;
  final  bool isNextPageAvailable;
 
-/// Create a copy of StarredReposState
+/// Create a copy of PaginatedReposState
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -410,14 +410,14 @@ int get hashCode => Object.hash(runtimeType,repos,isNextPageAvailable);
 
 @override
 String toString() {
-  return 'StarredReposState.loadSuccess(repos: $repos, isNextPageAvailable: $isNextPageAvailable)';
+  return 'PaginatedReposState.loadSuccess(repos: $repos, isNextPageAvailable: $isNextPageAvailable)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$LoadInSuccessCopyWith<$Res> implements $StarredReposStateCopyWith<$Res> {
+abstract mixin class _$LoadInSuccessCopyWith<$Res> implements $PaginatedReposStateCopyWith<$Res> {
   factory _$LoadInSuccessCopyWith(_LoadInSuccess value, $Res Function(_LoadInSuccess) _then) = __$LoadInSuccessCopyWithImpl;
 @override @useResult
 $Res call({
@@ -436,7 +436,7 @@ class __$LoadInSuccessCopyWithImpl<$Res>
   final _LoadInSuccess _self;
   final $Res Function(_LoadInSuccess) _then;
 
-/// Create a copy of StarredReposState
+/// Create a copy of PaginatedReposState
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? repos = null,Object? isNextPageAvailable = null,}) {
   return _then(_LoadInSuccess(
@@ -446,7 +446,7 @@ as bool,
   ));
 }
 
-/// Create a copy of StarredReposState
+/// Create a copy of PaginatedReposState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -461,14 +461,14 @@ $FreshCopyWith<List<GithubRepo>, $Res> get repos {
 /// @nodoc
 
 
-class _LoadFailure extends StarredReposState {
+class _LoadFailure extends PaginatedReposState {
   const _LoadFailure(this.repos, this.failure): super._();
   
 
 @override final  Fresh<List<GithubRepo>> repos;
  final  GithubFailure failure;
 
-/// Create a copy of StarredReposState
+/// Create a copy of PaginatedReposState
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -487,14 +487,14 @@ int get hashCode => Object.hash(runtimeType,repos,failure);
 
 @override
 String toString() {
-  return 'StarredReposState.loadFailure(repos: $repos, failure: $failure)';
+  return 'PaginatedReposState.loadFailure(repos: $repos, failure: $failure)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$LoadFailureCopyWith<$Res> implements $StarredReposStateCopyWith<$Res> {
+abstract mixin class _$LoadFailureCopyWith<$Res> implements $PaginatedReposStateCopyWith<$Res> {
   factory _$LoadFailureCopyWith(_LoadFailure value, $Res Function(_LoadFailure) _then) = __$LoadFailureCopyWithImpl;
 @override @useResult
 $Res call({
@@ -513,7 +513,7 @@ class __$LoadFailureCopyWithImpl<$Res>
   final _LoadFailure _self;
   final $Res Function(_LoadFailure) _then;
 
-/// Create a copy of StarredReposState
+/// Create a copy of PaginatedReposState
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? repos = null,Object? failure = null,}) {
   return _then(_LoadFailure(
@@ -523,7 +523,7 @@ as GithubFailure,
   ));
 }
 
-/// Create a copy of StarredReposState
+/// Create a copy of PaginatedReposState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -532,7 +532,7 @@ $FreshCopyWith<List<GithubRepo>, $Res> get repos {
   return $FreshCopyWith<List<GithubRepo>, $Res>(_self.repos, (value) {
     return _then(_self.copyWith(repos: value));
   });
-}/// Create a copy of StarredReposState
+}/// Create a copy of PaginatedReposState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
