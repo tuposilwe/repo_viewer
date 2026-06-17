@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:repo_viewer/core/presentation/toasts.dart';
+import 'package:repo_viewer/github/core/application/paginated_repos_notifier.dart';
 import 'package:repo_viewer/github/core/domain/github_failure.dart';
 import 'package:repo_viewer/github/core/presentation/no_results_display.dart';
 import 'package:repo_viewer/github/core/shared/providers.dart';
+import 'package:repo_viewer/github/repos/core/application/failure_repo_tile.dart';
+import 'package:repo_viewer/github/repos/core/application/loading_repo_tile.dart';
+import 'package:repo_viewer/github/repos/core/application/repo_tile.dart';
 import 'package:repo_viewer/github/repos/starred_repos/application/starred_repos_notifier.dart';
-import 'package:repo_viewer/github/repos/starred_repos/presentation/failure_repo_tile.dart';
-import 'package:repo_viewer/github/repos/starred_repos/presentation/loading_repo_tile.dart';
-import 'package:repo_viewer/github/repos/starred_repos/presentation/repo_tile.dart';
 
 class PaginatedReposListView extends ConsumerStatefulWidget {
-  const PaginatedReposListView({super.key});
+  final StateNotifierProvider<PaginatedReposNotifier, PaginatedReposState>
+  paginatedReposNotifierProvider;
+
+  const PaginatedReposListView({
+    super.key,
+    required this.paginatedReposNotifierProvider,
+  });
 
   @override
   ConsumerState<PaginatedReposListView> createState() =>
