@@ -75,6 +75,53 @@ class AuthorizationRouteArgs {
 }
 
 /// generated route for
+/// [SearchedReposPage]
+class SearchedReposRoute extends PageRouteInfo<SearchedReposRouteArgs> {
+  SearchedReposRoute({
+    Key? key,
+    required String searchTerm,
+    List<PageRouteInfo>? children,
+  }) : super(
+         SearchedReposRoute.name,
+         args: SearchedReposRouteArgs(key: key, searchTerm: searchTerm),
+         initialChildren: children,
+       );
+
+  static const String name = 'SearchedReposRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<SearchedReposRouteArgs>();
+      return SearchedReposPage(key: args.key, searchTerm: args.searchTerm);
+    },
+  );
+}
+
+class SearchedReposRouteArgs {
+  const SearchedReposRouteArgs({this.key, required this.searchTerm});
+
+  final Key? key;
+
+  final String searchTerm;
+
+  @override
+  String toString() {
+    return 'SearchedReposRouteArgs{key: $key, searchTerm: $searchTerm}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! SearchedReposRouteArgs) return false;
+    return key == other.key && searchTerm == other.searchTerm;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ searchTerm.hashCode;
+}
+
+/// generated route for
 /// [SignInPage]
 class SignInRoute extends PageRouteInfo<void> {
   const SignInRoute({List<PageRouteInfo>? children})

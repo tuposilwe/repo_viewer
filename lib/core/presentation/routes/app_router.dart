@@ -2,8 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:repo_viewer/auth/presentation/authorization_page.dart';
 import 'package:repo_viewer/auth/presentation/sign_in_page.dart';
-import 'package:repo_viewer/splash/presentation/splash_page.dart';
+import 'package:repo_viewer/github/repos/searched_repos/presentation/searched_repos_page.dart';
 import 'package:repo_viewer/github/repos/starred_repos/presentation/starred_repos_page.dart';
+import 'package:repo_viewer/splash/presentation/splash_page.dart';
 
 part 'app_router.gr.dart';
 
@@ -15,5 +16,6 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: SignInRoute.page, path: '/sign-in'),
     AutoRoute(page: AuthorizationRoute.page, path: '/auth'),
     AutoRoute(page: StarredReposRoute.page, path: '/starred'),
+    AutoRoute(page: SearchedReposRoute.page, path: '/search'),
   ];
 }

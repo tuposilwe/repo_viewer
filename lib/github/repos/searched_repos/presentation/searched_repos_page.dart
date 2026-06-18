@@ -3,26 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:repo_viewer/auth/shared/providers.dart';
-import 'package:repo_viewer/core/presentation/routes/app_router.dart';
 import 'package:repo_viewer/github/core/shared/providers.dart';
 import 'package:repo_viewer/github/repos/core/application/paginated_repos_list_view.dart';
 
 @RoutePage()
-class StarredReposPage extends ConsumerStatefulWidget {
-  const StarredReposPage({super.key});
+class SearchedReposPage extends ConsumerStatefulWidget {
+  final String searchTerm;
+
+  const SearchedReposPage({super.key, required this.searchTerm});
 
   @override
-  ConsumerState<StarredReposPage> createState() => _StarredReposPageState();
+  ConsumerState<SearchedReposPage> createState() => _SearchedReposPageState();
 }
 
-class _StarredReposPageState extends ConsumerState<StarredReposPage> {
+class _SearchedReposPageState extends ConsumerState<SearchedReposPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(
       () => ref
-          .read(starredReposNotifierProvider.notifier)
-          .getNextStarredReposPage(),
+          .read(searchedReposNotifierProvider.notifier)
+          .getNextSearchedReposPage(widget.searchTerm),
     );
   }
 
@@ -30,7 +31,7 @@ class _StarredReposPageState extends ConsumerState<StarredReposPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Starred Repos'),
+        title: Text(widget.searchTerm),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -41,25 +42,17 @@ class _StarredReposPageState extends ConsumerState<StarredReposPage> {
             },
             icon: Icon(MdiIcons.logoutVariant),
           ),
-          IconButton(
-            onPressed: () {
-              AutoRouter.of(
-                context,
-              ).push(SearchedReposRoute(searchTerm: 'flutter'));
-            },
-            icon: Icon(MdiIcons.magnify),
-          ),
         ],
       ),
       body: PaginatedReposListView(
-        paginatedReposNotifierProvider: starredReposNotifierProvider,
+        paginatedReposNotifierProvider: searchedReposNotifierProvider,
         getNextPage: (ref) {
           ref
-              .read(starredReposNotifierProvider.notifier)
-              .getNextStarredReposPage();
+              .read(searchedReposNotifierProvider.notifier)
+              .getNextSearchedReposPage(widget.searchTerm);
         },
         noResultsMessage:
-            "That's about everything we could find in your starred repos right now.",
+            "This is all we could find for your search term. Really...",
       ),
     );
   }
