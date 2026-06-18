@@ -44,6 +44,12 @@ class _StarredReposPageState extends ConsumerState<StarredReposPage> {
       ),
       body: PaginatedReposListView(
         paginatedReposNotifierProvider: starredReposNotifierProvider,
+        getNextPage: (ref) {
+          ref
+              .read(starredReposNotifierProvider.notifier)
+              .getNextStarredReposPage();
+        },
+        noResultsMessage: "That's about everything we could find in your starred repos right now.",
       ),
     );
   }
