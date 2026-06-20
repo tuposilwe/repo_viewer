@@ -8,7 +8,8 @@ import 'package:repo_viewer/github/core/infrastructure/pagination_config.dart';
 
 part 'paginated_repos_notifier.freezed.dart';
 
-typedef RepositoryGetter = Future<Either<GithubFailure, Fresh<List<GithubRepo>>>> Function(int page);
+typedef RepositoryGetter =
+    Future<Either<GithubFailure, Fresh<List<GithubRepo>>>> Function(int page);
 
 @freezed
 abstract class PaginatedReposState with _$PaginatedReposState {
@@ -30,10 +31,7 @@ abstract class PaginatedReposState with _$PaginatedReposState {
 }
 
 class PaginatedReposNotifier extends StateNotifier<PaginatedReposState> {
-
-
-  PaginatedReposNotifier()
-    : super(PaginatedReposState.initial(Fresh.yes([])));
+  PaginatedReposNotifier() : super(PaginatedReposState.initial(Fresh.yes([])));
 
   int _page = 1;
 
