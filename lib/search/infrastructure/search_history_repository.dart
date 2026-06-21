@@ -31,7 +31,7 @@ class SearchHistoryRepository {
   Future<void> deleteSearchTerm(String term) =>
       _deleteSearchTerm(term, _sembastDatabase.instance);
 
-  Future<void> putSearchTerm(String term) async {
+  Future<void> putSearchTermFirst(String term) async {
     await _sembastDatabase.instance.transaction((transaction) async {
       await _deleteSearchTerm(term, transaction);
       await _addSearchTerm(term, transaction);
@@ -45,7 +45,7 @@ class SearchHistoryRepository {
     );
 
     if (existingKey != null) {
-      putSearchTerm(term);
+      putSearchTermFirst(term);
       return;
     }
 
