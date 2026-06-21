@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_floating_search_bar_plus/material_floating_search_bar_plus.dart';
 
 import 'package:repo_viewer/search/shared/providers.dart';
 
@@ -17,7 +18,7 @@ class SearchBarCustom extends ConsumerStatefulWidget {
     required this.title,
     required this.hint,
     required this.onShouldNavigateToResultPage,
-    required this.onSignOutButtonPressed
+    required this.onSignOutButtonPressed,
   });
 
   @override
@@ -36,6 +37,13 @@ class _SearchBarState extends ConsumerState<SearchBarCustom> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return FloatingSearchBar(
+      body: widget.body,
+      title: Text(widget.title),
+      hint: widget.hint,
+      builder: (context, transition) {
+        return Container();
+      },
+    );
   }
 }
