@@ -100,7 +100,7 @@ class _PaginatedListView extends StatelessWidget {
     return ListView.builder(
       padding: fsb == null
           ? EdgeInsets.zero
-          : EdgeInsets.only(top: fsb.height + 8),
+          : EdgeInsets.only(top: fsb.height + 8 + MediaQuery.of(context).padding.top),
       itemCount: state.map(
         initial: (_) => 0,
         loadInProgress: (e) => e.repos.entity.length + e.itemsPerPage,
