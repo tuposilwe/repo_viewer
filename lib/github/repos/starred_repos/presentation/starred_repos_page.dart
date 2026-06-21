@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:material_floating_search_bar_plus/material_floating_search_bar_plus.dart';
 import 'package:repo_viewer/auth/shared/providers.dart';
 import 'package:repo_viewer/core/presentation/routes/app_router.dart';
 import 'package:repo_viewer/github/core/shared/providers.dart';
@@ -51,15 +52,21 @@ class _StarredReposPageState extends ConsumerState<StarredReposPage> {
           ),
         ],
       ),
-      body: PaginatedReposListView(
-        paginatedReposNotifierProvider: starredReposNotifierProvider,
-        getNextPage: (ref) {
-          ref
-              .read(starredReposNotifierProvider.notifier)
-              .getNextStarredReposPage();
+      body: FloatingSearchBar(
+         hint: 'Search...',
+        builder: (context, transition) {
+          return Container();
         },
-        noResultsMessage:
-            "That's about everything we could find in your starred repos right now.",
+        body: PaginatedReposListView(
+          paginatedReposNotifierProvider: starredReposNotifierProvider,
+          getNextPage: (ref) {
+            ref
+                .read(starredReposNotifierProvider.notifier)
+                .getNextStarredReposPage();
+          },
+          noResultsMessage:
+              "That's about everything we could find in your starred repos right now.",
+        ),
       ),
     );
   }

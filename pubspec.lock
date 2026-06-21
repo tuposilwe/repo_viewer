@@ -584,6 +584,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.7296"
+  material_floating_search_bar_plus:
+    dependency: "direct main"
+    description:
+      name: material_floating_search_bar_plus
+      sha256: ce2846311cad3c82782dc737ce11c6e4c7c0afaf6f18a58e5ea234a22072c214
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   meta:
     dependency: transitive
     description:
