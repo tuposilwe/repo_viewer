@@ -27,18 +27,31 @@ class SearchBarCustom extends ConsumerStatefulWidget {
 }
 
 class _SearchBarState extends ConsumerState<SearchBarCustom> {
+  late FloatingSearchBarController _controller;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    _controller = FloatingSearchBarController();
+
     Future.microtask(
       () => ref.read(searchHistoryNotifierProvider.notifier).watchSearchTerms(),
     );
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FloatingSearchBar(
+      controller: _controller,
       body: FloatingSearchBarScrollNotifier(child: widget.body),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,6 +74,11 @@ class _SearchBarState extends ConsumerState<SearchBarCustom> {
           ),
         ),
       ],
+      onSubmitted: (query) {
+        widget.onShouldNavigateToResultPage(query);
+        ref.read(searchHistoryNotifierProvider.notifier).addSearchTerm(query);
+        _controller.close();
+      },
       builder: (context, transition) {
         return Consumer(
           builder: (context, ref, child) {
