@@ -62,7 +62,23 @@ class _SearchBarState extends ConsumerState<SearchBarCustom> {
         ),
       ],
       builder: (context, transition) {
-        return Container();
+        return Consumer(
+          builder: (context, ref, child) {
+            final searchHistoryState = ref.watch(searchHistoryNotifierProvider);
+            return searchHistoryState.map(
+              data: (history) {
+                return Column(
+                  children: history.value
+                      .map((term) => ListTile(title: Text(term)))
+                      .toList(),
+                );
+              },
+              loading: (_) => const ListTile(title: LinearProgressIndicator()),
+              error: (e) =>
+                  ListTile(title: Text('Very unexpected error ${e.error}')),
+            );
+          },
+        );
       },
     );
   }
