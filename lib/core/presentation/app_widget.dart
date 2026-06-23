@@ -38,6 +38,7 @@ class MyApp extends ConsumerWidget {
     });
     return MaterialApp.router(
       title: 'Repo Viewer',
+      debugShowCheckedModeBanner: false,
       routerConfig: _appRouter.config(),
     );
   }

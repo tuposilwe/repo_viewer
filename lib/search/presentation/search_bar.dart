@@ -80,22 +80,38 @@ class _SearchBarState extends ConsumerState<SearchBarCustom> {
         _controller.close();
       },
       builder: (context, transition) {
-        return Consumer(
-          builder: (context, ref, child) {
-            final searchHistoryState = ref.watch(searchHistoryNotifierProvider);
-            return searchHistoryState.map(
-              data: (history) {
-                return Column(
-                  children: history.value
-                      .map((term) => ListTile(title: Text(term)))
-                      .toList(),
-                );
-              },
-              loading: (_) => const ListTile(title: LinearProgressIndicator()),
-              error: (e) =>
-                  ListTile(title: Text('Very unexpected error ${e.error}')),
-            );
-          },
+        return Material(
+          color: Theme.of(context).cardColor,
+          elevation: 4,
+          borderRadius: BorderRadius.circular(8),
+          clipBehavior: Clip.hardEdge,
+          child: Consumer(
+            builder: (context, ref, child) {
+              final searchHistoryState = ref.watch(
+                searchHistoryNotifierProvider,
+              );
+              return searchHistoryState.map(
+                data: (history) {
+                  return Column(
+                    children: history.value
+                        .map(
+                          (term) => ListTile(
+                            title: Text(term),
+                            onTap: () {
+                              print('hey');
+                            },
+                          ),
+                        )
+                        .toList(),
+                  );
+                },
+                loading: (_) =>
+                    const ListTile(title: LinearProgressIndicator()),
+                error: (e) =>
+                    ListTile(title: Text('Very unexpected error ${e.error}')),
+              );
+            },
+          ),
         );
       },
     );
