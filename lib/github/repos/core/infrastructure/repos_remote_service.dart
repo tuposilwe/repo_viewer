@@ -64,4 +64,37 @@ abstract class ReposRemoteService {
       }
     }
   }
+
+  Future<bool?> getStarredStatus(String fullRepoName) async {
+    final requestUri = Uri.https(
+      'api.github.com',
+      '/user/starred/$fullRepoName',
+    );
+    try {
+      final response = await _dio.getUri(
+        requestUri,
+        options: Options(
+          validateStatus: (status) =>
+              (status != null && status >= 200 && status < 400) ||
+              status == 404,
+        ),
+      );
+
+      if (response.statusCode == 204) {
+        return true;
+      } else if (response.statusCode == 404) {
+        return false;
+      } else {
+        throw RestAPiException(response.statusCode);
+      }
+    } on DioException catch (e) {
+      if (e.isNoConnectionError) {
+        return null;
+      } else if (e.response != null) {
+        throw RestAPiException(e.response?.statusCode);
+      } else {
+        rethrow;
+      }
+    }
+  }
 }
