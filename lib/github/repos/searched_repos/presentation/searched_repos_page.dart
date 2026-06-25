@@ -32,22 +32,22 @@ class _SearchedReposPageState extends ConsumerState<SearchedReposPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.searchTerm),
-        centerTitle: true,
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        actions: [
-          IconButton(
-            onPressed: () {
-              ref.read(authNotifierProvider.notifier).signOut();
-            },
-            icon: Icon(MdiIcons.logoutVariant),
-          ),
-        ],
-      ),
+      // appBar: AppBar(
+      //   title: Text(widget.searchTerm),
+      //   centerTitle: true,
+      //   backgroundColor: Theme.of(context).colorScheme.primary,
+      //   foregroundColor: Theme.of(context).colorScheme.onPrimary,
+      //   actions: [
+      //     IconButton(
+      //       onPressed: () {
+      //         ref.read(authNotifierProvider.notifier).signOut();
+      //       },
+      //       icon: Icon(MdiIcons.logoutVariant),
+      //     ),
+      //   ],
+      // ),
       body: SearchBarCustom(
-        title: 'Starred repositories',
+        title: widget.searchTerm,
         hint: 'Search all repositories...',
         onShouldNavigateToResultPage: (searchTerm) {
           AutoRouter.of(context).pushAndPopUntil(

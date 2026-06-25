@@ -1,4 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -78,6 +81,26 @@ class _SearchBarState extends ConsumerState<SearchBarCustom> {
         ],
       ),
       hint: widget.hint,
+      automaticallyImplyBackButton: false,
+      leadingActions: [
+        if (AutoRouter.of(context).canPop() &&
+            (Platform.isIOS || Platform.isMacOS))
+          IconButton(
+            onPressed: () {
+              AutoRouter.of(context).pop();
+            },
+            splashRadius: 18,
+            icon: const Icon(Icons.arrow_back_ios),
+          )
+        else if (AutoRouter.of(context).canPop())
+          IconButton(
+            onPressed: () {
+              AutoRouter.of(context).pop();
+            },
+            splashRadius: 18,
+            icon: const Icon(Icons.arrow_back),
+          ),
+      ],
       actions: [
         FloatingSearchBarAction.searchToClear(showIfClosed: false),
         FloatingSearchBarAction(
