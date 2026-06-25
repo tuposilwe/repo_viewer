@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:repo_viewer/core/infrastructure/dio_extensions.dart';
 import 'package:repo_viewer/core/infrastructure/network_exceptions.dart';
@@ -65,6 +66,7 @@ abstract class ReposRemoteService {
     }
   }
 
+  // Returns `null` if there's no internet connection.
   Future<bool?> getStarredStatus(String fullRepoName) async {
     final requestUri = Uri.https(
       'api.github.com',
@@ -84,6 +86,37 @@ abstract class ReposRemoteService {
         return true;
       } else if (response.statusCode == 404) {
         return false;
+      } else {
+        throw RestAPiException(response.statusCode);
+      }
+    } on DioException catch (e) {
+      if (e.isNoConnectionError) {
+        return null;
+      } else if (e.response != null) {
+        throw RestAPiException(e.response?.statusCode);
+      } else {
+        rethrow;
+      }
+    }
+  }
+
+  // Returns `null` if there's no internet connection.
+  Future<Unit?> switchStarredStatus(
+    String fullRepoName, {
+    required bool isCurrentlyStarred,
+  }) async {
+    final requestUri = Uri.https(
+      'api.github.com',
+      '/user/starred/$fullRepoName',
+    );
+
+    try {
+      final response = await (isCurrentlyStarred
+          ? _dio.deleteUri(requestUri)
+          : _dio.putUri(requestUri));
+
+      if (response.statusCode == 204) {
+        return unit;
       } else {
         throw RestAPiException(response.statusCode);
       }
