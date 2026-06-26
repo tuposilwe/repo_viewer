@@ -17,6 +17,20 @@ class RepoDetailLocalService {
     await _store
         .record(githubRepoDetailDto.fullName)
         .put(_sembastDatabase.instance, githubRepoDetailDto.toSembast());
+
+    final keys = await _store.findKeys(
+      _sembastDatabase.instance,
+      finder: Finder(
+        sortOrders: [SortOrder(GithubRepoDetailDto.lastUsedFieldName, false)],
+      ),
+    );
+
+    if (keys.length > cacheSize) {
+      final keysToRemove = keys.sublist(cacheSize);
+      for (final key in keysToRemove) {
+        await _store.record(key).delete(_sembastDatabase.instance);
+      }
+    }
   }
 
   Future<GithubRepoDetailDto?> getRepoDetail(String fullRepoName) async {
